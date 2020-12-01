@@ -1,79 +1,70 @@
 # Boris Paul Pizha  
 # Simple Game Project 
 
+# User Name
+user = "Boris Pizha"
 
-print("Rock Paper Scissors game in Python")
+# Printing a welcome for user
+print("\n Rock Paper Scissors game in Python by " + user)
+
+# Importing Randit so user 
+from random import choice, randint
 
 
-from random import randint
+def randomint():
+    return randint(1, 3)
 
-def round(items):
-  
-   # Reading player 1 input
-   player = input("Please enter your choice Rock, Paper, Scissors: ")
-  
-   # Generating random number between 1, 100
-   compChance = randint(1,100)
-          
-   # Deciding computer choice
-   if compChance < 33:
-       computerChoice = 1
-   elif compChance >= 33 and compChance <= 66:
-       computerChoice = 2
-   else:
-       computerChoice = 3
-      
-   computer = items[computerChoice-1]
-  
-   # Computer
-   #  input
-   print("\n Computer chose: " + items[computerChoice-1]  + ". \n" )
-  
-   # Storing player inputs in list
-   inputs = [player.upper(), computer.upper()]
-  
-   return inputs
-  
+# Choice for users to play game
+def choice_string(choice):
+    if choice == 0:
+        return 'Quit'
+    elif choice == 1:
+        return 'Scissor'
+    elif choice == 2:
+        return 'Rock'
+    else:
+        return 'Paper'
+    
+    
 
 def main():
-  
-   options_to_choose = ["Rock", "Paper", "Scissors"]
-  
-   inputs = round(options_to_choose)
-  
-   while inputs[0] == inputs[1]:
-       inputs = round(options_to_choose)
-  
-   if inputs == ['ROCK', 'PAPER'] or inputs == ['PAPER', 'ROCK']:
-       if inputs[0] == 'PAPER':
-           print("\n You win, because Paper covers Rock \n")
-       else:
-           print("\n You lose, because Paper covers Rock \n")
-          
-   
-   elif inputs == ['ROCK', 'SCISSORS'] or inputs == ['SCISSORS', 'ROCK']:
+    # Validation 
+    while True:
+        try:
+            # User will play againt computer that will get random numbers from list the next line 
+            computer_choice = randomint()
+            # User choice To start the game
+            user_choice = int(input('\n\n Here are your options: \n 0. quit \n 1.Rock \n 2.Paper \n 3.Scissors' '\n Please enter your choice: '))
 
-       if inputs[0] == 'ROCK':
+            # If Computer choice and user choice are the same there will be a tie 
+            if (computer_choice == 1 and user_choice == 1) or (computer_choice == 2 and user_choice == 2) or (computer_choice == 3 and user_choice == 3):
+                print('\n The computer choice is: ', computer_choice)
+                print("\n There is a TIE")
+                # User Will get a message every time there is a Tie 
+                if computer_choice == user_choice:
+                    print("\n Please try Again! ")
+      
 
-           print("\n You win, because Rock smashes scissors\n")
-       else:
-           print("\n You lose, because Rock smashes scissors \n")
-
-
-   elif inputs == ['SCISSORS', 'PAPER'] or inputs == ['PAPER', 'SCISSORS']:
-       if inputs[0] == 'SCISSORS':
-
-           print("\n You win, because Scissors cut paper \n")
-       else:
-           print("\n You lose,becasue Scissors cut paper \n")
-  
-    
+            # Computer will win if it gets the right choice 
+            elif (computer_choice == 1 and user_choice == 3) or (computer_choice == 2 and user_choice == 1) or (computer_choice == 3 and user_choice == 2):
+                print('\n The computer choice is:', computer_choice)
+                print("\n Computer WON. You Lost ")
         
-   else:
-       print("\n Invalid Error Please Try Again \n")
+            # Or user will win intead 
+            elif (computer_choice == 3 and user_choice == 1) or (computer_choice == 1 and user_choice == 2) or (computer_choice == 2 and user_choice == 3):
+                print('\n The computer choice is: ', computer_choice)
+                print("\n CONGRATS You WON " + user)
+            # Quiting application by hitting 0
 
-    
-      
-      
-# Calling main function
+            elif (user_choice == 0):
+                print("\n See you Later ")
+                break
+                
+            # Validation and will display message to enter a valid entry
+            else:
+                raise ValueError()
+        except:
+            print("\n Enter valid input from User Choice List\n ")
+
 main()
+
